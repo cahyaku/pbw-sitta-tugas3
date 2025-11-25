@@ -48,7 +48,7 @@ function handleLogin(event) {
 
         // Gunakan setTimeout untuk memastikan redirect langsung tanpa popup
         setTimeout(() => {
-            window.location.replace('dashboard.html');
+            window.location.replace('templates/dashboard.html');
         }, 50);
 
     } else {
