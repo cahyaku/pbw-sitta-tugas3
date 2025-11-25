@@ -1,0 +1,28 @@
+<!-- App Modal Component Template -->
+<script type="text/x-template" id="app-modal-template">
+    <div class="modal fade" :id="modalId" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" :class="sizeClass">
+            <div class="modal-content">
+                <div class="modal-header" :class="headerClass">
+                    <h5 class="modal-title">
+                        <i :class="iconClass" class="me-2"></i>
+                        {{ title }}
+                    </h5>
+                    <button type="button" class="btn-close" :class="closeButtonClass" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <slot></slot>
+                </div>
+                <div class="modal-footer" v-if="showFooter">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-2"></i>{{ cancelText }}
+                    </button>
+                    <button type="button" class="btn" :class="confirmBtnClass" @click="$emit('confirm')">
+                        <i class="bi bi-check-circle me-2"></i>{{ confirmText }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

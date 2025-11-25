@@ -460,7 +460,7 @@ window.StokComponent = {
          */
         logout() {
             sessionStorage.removeItem('currentUser');
-            window.location.href = '../index.html';
+            window.location.href = 'index.html';
         }
     },
 
@@ -484,7 +484,7 @@ window.StokComponent = {
 document.addEventListener('DOMContentLoaded', function () {
     // Periksa apakah pengguna sudah login
     if (!isLoggedIn()) {
-        window.location.href = '../index.html';
+        window.location.href = 'index.html';
         return;
     }
 

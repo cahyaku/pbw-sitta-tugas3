@@ -1,0 +1,76 @@
+<!-- Order Form Component Template -->
+<template id="order-form-template">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Nomor DO</label>
+            <input type="text" class="form-control" :value="nomorDO" readonly>
+            <small class="text-muted">Tergenerate otomatis</small>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">NIM</label>
+            <input type="text" class="form-control" v-model="formData.nim" placeholder="Masukkan NIM" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" v-model="formData.nama" placeholder="Masukkan nama lengkap"
+                required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Ekspedisi</label>
+            <select class="form-select" v-model="formData.ekspedisi" required>
+                <option value="">Pilih Ekspedisi</option>
+                <option value="JNE Regular">JNE Regular</option>
+                <option value="JNE Express">JNE Express</option>
+            </select>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Tanggal Kirim</label>
+            <input type="date" class="form-control" v-model="formData.tanggalKirim" required>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label class="form-label">Paket Bahan Ajar</label>
+            <select class="form-select" v-model="formData.paketKode" @change="$emit('paket-change')" required>
+                <option value="">Pilih Paket</option>
+                <option v-for="paket in paketList" :key="paket.kode" :value="paket.kode">
+                    {{ paket.kode }} - {{ paket.nama }}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Detail Isi Paket -->
+    <div class="row">
+        <div class="col-12 mb-3">
+            <div class="alert alert-info">
+                <h6 class="alert-heading"><i class="bi bi-box-seam me-2"></i>Detail Isi Paket:</h6>
+
+                <!-- Tampilkan jika paket sudah dipilih -->
+                <div v-if="selectedPaket">
+                    <ul class="mb-2">
+                        <li v-for="(kode, index) in selectedPaket.isi" :key="index">
+                            <strong>{{ kode }}</strong> - {{ getMatkulName(kode) }}
+                        </li>
+                    </ul>
+                    <hr>
+                    <p class="mb-0">
+                        <strong>Total Harga:</strong>
+                        <span class="text-success fw-bold">Rp {{ selectedPaket.harga.toLocaleString('id-ID') }}</span>
+                    </p>
+                </div>
+
+                <!-- Tampilkan jika paket belum dipilih -->
+                <div v-else>
+                    <p class="mb-1"><strong>Kode:</strong> -</p>
+                    <p class="mb-0"><strong>Total Harga:</strong> -</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

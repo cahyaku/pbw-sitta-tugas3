@@ -7,7 +7,7 @@ const API = {
     /**
      * Base URL untuk data JSON
      */
-    baseURL: '../data/',
+    baseURL: 'data/',
 
     /**
      * Fetch data dari dataBahanAjar.json

@@ -1,0 +1,102 @@
+<!-- DO Tracking Component Template -->
+<template id="do-tracking-template">
+    <div>
+        <!-- Hasil Tracking -->
+        <div v-if="showResults && tracking" class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-info-circle me-2"></i>Hasil Tracking
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Informasi Penerima -->
+                            <div class="col-md-6">
+                                <h6><i class="bi bi-person me-2"></i>Informasi Penerima</h6>
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td width="40%"><strong>NIM:</strong></td>
+                                        <td>{{ tracking.nim }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nama:</strong></td>
+                                        <td>{{ tracking.nama }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>No. DO:</strong></td>
+                                        <td><span class="badge bg-secondary">{{ tracking.nomorDO }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Status:</strong></td>
+                                        <td><span class="badge" :class="getStatusBadgeClass(tracking.status)">{{
+                                                tracking.status }}</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- Detail Paket -->
+                            <div class="col-md-6">
+                                <h6><i class="bi bi-box me-2"></i>Detail Paket</h6>
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td width="40%"><strong>Ekspedisi:</strong></td>
+                                        <td>{{ tracking.ekspedisi }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tanggal Kirim:</strong></td>
+                                        <td>{{ formatDate(tracking.tanggalKirim) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Jenis Paket:</strong></td>
+                                        <td>{{ tracking.paket }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total:</strong></td>
+                                        <td class="fw-bold text-success">Rp {{ tracking.total.toLocaleString('id-ID') }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- Riwayat Perjalanan -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h6><i class="bi bi-clock-history me-2"></i>Riwayat Perjalanan</h6>
+                                <div class="list-group">
+                                    <div v-for="(item, index) in tracking.perjalanan" :key="index"
+                                        class="list-group-item">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">{{ formatDateTime(item.waktu) }}</div>
+                                                {{ item.keterangan }}
+                                            </div>
+                                            <span class="badge rounded-pill bg-primary">{{ index + 1 }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tidak Ada Hasil -->
+        <div v-if="showNoResults" class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="bi bi-exclamation-triangle display-4 text-warning"></i>
+                        <h5 class="mt-3">Data Tidak Ditemukan</h5>
+                        <p class="text-muted">Nomor DO yang Anda masukkan tidak ditemukan dalam sistem.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
